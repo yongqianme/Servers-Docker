@@ -1,0 +1,18 @@
+version: "2.1"
+services:
+  omniedge:
+    image: omniedge
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: omniedge
+    privileged: true
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      - OMNIEDGE_SECURITYKEY=OMNIEDGE_SECURITYKEY
+      - OMNIEDGE_VIRUTALNETWORK_ID=OMNIEDGE_VIRUTALNETWORK_ID
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:                                             
+      - net_admin
