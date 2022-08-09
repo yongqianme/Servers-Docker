@@ -1,6 +1,6 @@
 # Bring everything into intranet
 
-1. Bring code-server,libreoffice into intranet
+Bring code-server,libreoffice,nextcloud,openvscode-server,resillo-sync,and syncthing into intranet
 
 ## RUN
 
