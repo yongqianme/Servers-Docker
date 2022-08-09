@@ -1,11 +1,9 @@
 version: "2.1"
 services:
   omniedge:
-    image: omniedge
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: omniedge/omniedge:latest
     container_name: omniedge
+    hostname: omniedge
     privileged: true
     network_mode: host
     restart: unless-stopped
