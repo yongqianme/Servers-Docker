@@ -17,22 +17,19 @@ services:
     cap_add:                                             
       - net_admin
 
-  code-server:
-    image: lscr.io/linuxserver/code-server:latest
-    container_name: code-server
+  resilio-sync:
+    image: lscr.io/linuxserver/resilio-sync:latest
+    container_name: resilio-sync
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-      - PASSWORD=password #optional
-      - HASHED_PASSWORD= #optional
-      - SUDO_PASSWORD=password #optional
-      - SUDO_PASSWORD_HASH= #optional
-      - PROXY_DOMAIN=code-server.my.domain #optional
-      - DEFAULT_WORKSPACE=/config/workspace #optional
     volumes:
-      - /path/to/appdata/config:/config
+      - /path/to/config:/config
+      - /path/to/downloads:/downloads
+      - /path/to/data:/sync
     ports:
-      - 8443:8443
+      - 8888:8888
+      - 55555:55555
     restart: unless-stopped
   

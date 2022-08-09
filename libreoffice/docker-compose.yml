@@ -4,7 +4,7 @@ services:
     image: omniedge
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ../omniedge/Dockerfile
     container_name: omniedge
     privileged: true
     network_mode: host
@@ -16,23 +16,16 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:                                             
       - net_admin
-
-  code-server:
-    image: lscr.io/linuxserver/code-server:latest
-    container_name: code-server
+  
+  libreoffice:
+    image: lscr.io/linuxserver/libreoffice:latest
+    container_name: libreoffice
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-      - PASSWORD=password #optional
-      - HASHED_PASSWORD= #optional
-      - SUDO_PASSWORD=password #optional
-      - SUDO_PASSWORD_HASH= #optional
-      - PROXY_DOMAIN=code-server.my.domain #optional
-      - DEFAULT_WORKSPACE=/config/workspace #optional
     volumes:
-      - /path/to/appdata/config:/config
+      - /path/to/config:/config
     ports:
-      - 8443:8443
+      - 3000:3000
     restart: unless-stopped
-  
