@@ -1,0 +1,38 @@
+version: "2.1"
+services:
+  omniedge:
+    image: omniedge/omniedge:latest
+    container_name: omniedge
+    hostname: omniedge
+    privileged: true
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      - OMNIEDGE_SECURITYKEY=OMNIEDGE_SECURITYKEY
+      - OMNIEDGE_VIRUTALNETWORK_ID=OMNIEDGE_VIRUTALNETWORK_ID
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+
+  supernode:
+    image: omniedge/supernode:latest
+    container_name: supernode
+    ports:
+      - "443:443/udp"
+    networks:
+     - supernode
+
+  dnsmasq:
+    container_name: dnsmasq
+    build:
+      context: .
+      dockerfile: docker-dnsmasq/Dockerfile
+    networks:
+     - dns
+    ports:
+     - "53:53/udp"
+
+networks:
+  dns:
+  supernode:
